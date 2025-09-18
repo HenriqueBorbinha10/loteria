@@ -403,21 +403,60 @@
     const container = document.getElementById("videos-container");
     container.innerHTML = "";
     const videosPerDay = parseInt(localStorage.getItem("videosPerDay")) || 3;
-    let typeArray = [];
-    try {
-      typeArray = JSON.parse(localStorage.getItem("videoTypes")) || ["Curiosities"];
-    } catch { typeArray = ["Curiosities"]; }
-    document.getElementById('selectedTypeText').textContent = typeArray.length > 0 ? typeArray.join(", ") : "Curiosities";
-    for (let i = 1; i <= videosPerDay; i++) {
-      const videoDiv = document.createElement("div");
-      videoDiv.className = "bg-[#18181b] rounded-xl px-5 py-4 video-box flex flex-col justify-start items-start shadow relative";
-      videoDiv.innerHTML = `
-        <span class="video-label-pink">Vídeo ${i}</span>
-        <span class="processed-label mt-2">✅ PROCESSED</span>
-      `;
-      container.appendChild(videoDiv);
+    
+    // Função para gerar um jogo "inteligente" da Mega
+    function gerarJogoMega() {
+        const pares = [];
+        const impares = [];
+        const baixos = [];
+        const altos = [];
+
+        for (let i = 1; i <= 60; i++) {
+            if (i <= 30) baixos.push(i); else altos.push(i);
+            if (i % 2 === 0) pares.push(i); else impares.push(i);
+        }
+
+        // Escolher 3 pares e 3 ímpares (ou balanceado se não for possível)
+        const jogo = [];
+        const shuffle = arr => arr.sort(() => Math.random() - 0.5);
+
+        const paresEscolhidos = shuffle([...pares]).slice(0, 3);
+        const imparesEscolhidos = shuffle([...impares]).slice(0, 3);
+        jogo.push(...paresEscolhidos, ...imparesEscolhidos);
+
+        // Ajuste para balancear baixos e altos
+        let countBaixos = jogo.filter(n => n <= 30).length;
+        let countAltos = jogo.filter(n => n > 30).length;
+        if (countBaixos < 3) {
+            let extras = shuffle(baixos.filter(n => !jogo.includes(n))).slice(0, 3 - countBaixos);
+            extras.forEach(n => {
+                // substituir algum número alto aleatório
+                let index = jogo.findIndex(x => x > 30);
+                if (index !== -1) jogo[index] = n;
+            });
+        } else if (countAltos < 3) {
+            let extras = shuffle(altos.filter(n => !jogo.includes(n))).slice(0, 3 - countAltos);
+            extras.forEach(n => {
+                let index = jogo.findIndex(x => x <= 30);
+                if (index !== -1) jogo[index] = n;
+            });
+        }
+
+        return shuffle(jogo).slice(0,6).sort((a,b)=>a-b); // ordenar para melhor visualização
     }
-  }
+
+    for (let i = 1; i <= videosPerDay; i++) {
+        const jogo = gerarJogoMega();
+        const videoDiv = document.createElement("div");
+        videoDiv.className = "bg-[#18181b] rounded-xl px-5 py-4 video-box flex flex-col justify-start items-start shadow relative";
+        videoDiv.innerHTML = `
+            <span class="video-label-pink">Jogo ${i}</span>
+            <span class="processed-label mt-2">🎯 ${jogo.join(" - ")}</span>
+        `;
+        container.appendChild(videoDiv);
+    }
+}
+
 
   function voltarParaEtapa01() {
     document.getElementById("etapa03").classList.add("hidden");
