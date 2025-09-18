@@ -330,26 +330,26 @@
 
   function startBalance01() {
     clearInterval(interval1);
-    document.getElementById('balance01').textContent = `WINNERS: U$ ${balance1.toFixed(2)}`;
+    document.getElementById('balance01').textContent = `WINNERS: ${balance1.toFixed(2)}`;
     interval1 = setInterval(() => {
       balance1 *= 1.03;
-      document.getElementById('balance01').textContent = `WINNERS: U$ ${balance1.toFixed(2)}`;
+      document.getElementById('balance01').textContent = `WINNERS: ${balance1.toFixed(2)}`;
     }, stepTime);
   }
   function startBalance02() {
     clearInterval(interval2);
-    document.getElementById('balance02').textContent = `WINNERS: U$ ${balance2.toFixed(2)}`;
+    document.getElementById('balance02').textContent = `WINNERS: ${balance2.toFixed(2)}`;
     interval2 = setInterval(() => {
       balance2 *= 1.03;
-      document.getElementById('balance02').textContent = `WINNERS: U$ ${balance2.toFixed(2)}`;
+      document.getElementById('balance02').textContent = `WINNERS: ${balance2.toFixed(2)}`;
     }, stepTime);
   }
   function startBalance03() {
     clearInterval(interval3);
-    document.getElementById('balance03').textContent = `WINNERS: U$ ${balance3.toFixed(2)}`;
+    document.getElementById('balance03').textContent = `WINNERS: ${balance3.toFixed(2)}`;
     interval3 = setInterval(() => {
       balance3 *= 1.03;
-      document.getElementById('balance03').textContent = `WINNERS: U$ ${balance3.toFixed(2)}`;
+      document.getElementById('balance03').textContent = `WINNERS: ${balance3.toFixed(2)}`;
     }, stepTime);
   }
   // Chama o saldo nas etapas corretas
@@ -381,9 +381,9 @@
         percent.textContent = width + "%";
       }
     }, 75);
-    setTimeout(() => mostrarFrase("phrase1"), 1000);
-    setTimeout(() => mostrarFrase("phrase2"), 1000);
-    setTimeout(() => mostrarFrase("phrase3"), 1000);
+    setTimeout(() => mostrarFrase("phrase1"), 10000);
+    setTimeout(() => mostrarFrase("phrase2"), 10000);
+    setTimeout(() => mostrarFrase("phrase3"), 10000);
   }
   function mostrarFrase(id) {
     const el = document.getElementById(id);
