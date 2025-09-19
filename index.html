@@ -338,18 +338,18 @@
   }
   function startBalance02() {
     clearInterval(interval2);
-    document.getElementById('balance02').textContent = `WINNERS: ${balance2.toFixed(2)}`;
+    document.getElementById('balance02').textContent = `WINNERS: ${Math.floor(balance1)}`;
     interval2 = setInterval(() => {
       balance2 *= 1.03;
-      document.getElementById('balance02').textContent = `WINNERS: ${balance2.toFixed(2)}`;
+      document.getElementById('balance02').textContent = `WINNERS: ${Math.floor(balance1)}`;
     }, stepTime);
   }
   function startBalance03() {
     clearInterval(interval3);
-    document.getElementById('balance03').textContent = `WINNERS: ${balance3.toFixed(2)}`;
+    document.getElementById('balance03').textContent = `WINNERS: ${Math.floor(balance1)}`;
     interval3 = setInterval(() => {
       balance3 *= 1.03;
-      document.getElementById('balance03').textContent = `WINNERS: ${balance3.toFixed(2)}`;
+      document.getElementById('balance03').textContent = `WINNERS: ${Math.floor(balance1)}`;
     }, stepTime);
   }
   // Chama o saldo nas etapas corretas
