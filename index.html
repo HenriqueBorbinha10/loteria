@@ -330,10 +330,10 @@
 
   function startBalance01() {
     clearInterval(interval1);
-    document.getElementById('balance01').textContent = `WINNERS: ${balance1.toFixed(2)}`;
+    document.getElementById('balance01').textContent = `WINNERS: ${Math.floor(balance1)}`;
     interval1 = setInterval(() => {
       balance1 *= 1.03;
-      document.getElementById('balance01').textContent = `WINNERS: ${balance1.toFixed(2)}`;
+      document.getElementById('balance01').textContent = `WINNERS: ${Math.floor(balance1)}`;
     }, stepTime);
   }
   function startBalance02() {
